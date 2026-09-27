@@ -301,10 +301,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\GlobalGameDefines.h" />
+    <ClInclude Include="src\Game\Managers\GameManager.h" />
+    <ClInclude Include="src\Menu\Screen.h" />
+    <ClInclude Include="src\Menu\ScreenEnding.h" />
+    <ClInclude Include="src\Menu\ScreenGameplay.h" />
+    <ClInclude Include="src\Menu\ScreenLogo.h" />
+    <ClInclude Include="src\Menu\ScreenOptions.h" />
+    <ClInclude Include="src\Menu\ScreenTitle.h" />
+    <ClInclude Include="src\Menu\StateMachineMngr.h" />
     <ClInclude Include="src\resource_dir.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\Frogger.cpp" />
+    <ClCompile Include="src\Game\GlobalGameDefines.cpp" />
+    <ClCompile Include="src\Game\Managers\GameManager.cpp" />
+    <ClCompile Include="src\Menu\Screen.cpp" />
+    <ClCompile Include="src\Menu\ScreenEnding.cpp" />
+    <ClCompile Include="src\Menu\ScreenGameplay.cpp" />
+    <ClCompile Include="src\Menu\ScreenLogo.cpp" />
+    <ClCompile Include="src\Menu\ScreenOptions.cpp" />
+    <ClCompile Include="src\Menu\ScreenTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico" />
@@ -313,12 +330,48 @@
     <ResourceCompile Include="src\application.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\Game\Arcade - Frogger - Miscellaneous - General Rip.png" />
+    <Image Include="resources\Game\Bush.png" />
+    <Image Include="resources\Game\Enemies\Log1U.png" />
+    <Image Include="resources\Game\Enemies\Log2U.png" />
+    <Image Include="resources\Game\Enemies\Log4U.png" />
+    <Image Include="resources\Game\Enemies\LogCenter.png" />
+    <Image Include="resources\Game\Enemies\LogLeft.png" />
+    <Image Include="resources\Game\Enemies\LogRight.png" />
+    <Image Include="resources\Game\Enemies\Truck1.png" />
+    <Image Include="resources\Game\Enemies\Truck2.png" />
+    <Image Include="resources\Game\Enemies\Truck3.png" />
+    <Image Include="resources\Game\Enemies\Truck4.png" />
+    <Image Include="resources\Game\Enemies\Truck5.png" />
+    <Image Include="resources\Game\Enemies\TurtleDisabled.png" />
+    <Image Include="resources\Game\Enemies\TurtleEnabled.png" />
+    <Image Include="resources\Game\Floor.png" />
+    <Image Include="resources\Game\Home.png" />
+    <Image Include="resources\Game\Life.png" />
+    <Image Include="resources\Game\PlayerJump_D.png" />
+    <Image Include="resources\Game\PlayerJump_F.png" />
+    <Image Include="resources\Game\PlayerJump_L.png" />
+    <Image Include="resources\Game\PlayerJump_R.png" />
+    <Image Include="resources\Game\Player_D.png" />
+    <Image Include="resources\Game\Player_F.png" />
+    <Image Include="resources\Game\Player_L.png" />
+    <Image Include="resources\Game\Player_R.png" />
+    <Image Include="resources\Game\Point.png" />
+    <Image Include="resources\Menu\MainLogo.png" />
+    <Image Include="resources\Title.jpg" />
     <Image Include="resources\wabbit_alpha.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="raylib.vcxproj">
       <Project>{8898EA18-743A-15EF-5DF5-284349369C3F}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\Sounds\frogger_hop.wav" />
+    <Media Include="resources\Sounds\frogger_plunk.wav" />
+    <Media Include="resources\Sounds\frogger_squash.wav" />
+    <Media Include="resources\Sounds\Game_Over.mp3" />
+    <Media Include="resources\Sounds\Lily_Islands.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

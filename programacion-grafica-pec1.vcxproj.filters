@@ -13,15 +13,87 @@
     <Filter Include="Windows Resource Files">
       <UniqueIdentifier>{6B659E97-575F-C7E9-40CC-5DFA2C652D56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{e84ad78b-1a56-42ef-933c-93db0499168c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{8cc0ce3e-2069-42e2-b557-9f6caaa5df15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Managers">
+      <UniqueIdentifier>{02a8410c-e212-404c-b7a9-9b5253acbffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files\Game">
+      <UniqueIdentifier>{b1a94d7a-d66a-4269-b8fc-49c7bcf3e00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files\Sounds">
+      <UniqueIdentifier>{2d02eca4-7d7b-47ea-933b-4cc6af375a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files\Menu">
+      <UniqueIdentifier>{664cf938-7cec-42d2-8e0a-523321b38326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files\Game\Enemies">
+      <UniqueIdentifier>{be3dc92d-e334-4ac3-9bb9-32bf40d61c6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\Managers\GameManager.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\GlobalGameDefines.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\Screen.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\ScreenEnding.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\ScreenGameplay.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\ScreenLogo.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\ScreenOptions.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\ScreenTitle.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\StateMachineMngr.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.c">
+    <ClCompile Include="src\Frogger.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Managers\GameManager.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\GlobalGameDefines.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\Screen.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\ScreenEnding.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\ScreenGameplay.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\ScreenLogo.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\ScreenOptions.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\ScreenTitle.cpp">
+      <Filter>Source Files\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,5 +110,109 @@
     <Image Include="resources\wabbit_alpha.png">
       <Filter>Game Resource Files</Filter>
     </Image>
+    <Image Include="resources\Title.jpg">
+      <Filter>Game Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Menu\MainLogo.png">
+      <Filter>Game Resource Files\Menu</Filter>
+    </Image>
+    <Image Include="resources\Game\Arcade - Frogger - Miscellaneous - General Rip.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Bush.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Floor.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Home.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Life.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Player_D.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Player_F.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Player_L.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Player_R.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\PlayerJump_D.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\PlayerJump_F.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\PlayerJump_L.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\PlayerJump_R.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Point.png">
+      <Filter>Game Resource Files\Game</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Log1U.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Log2U.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Log4U.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\LogCenter.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\LogLeft.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\LogRight.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Truck1.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Truck2.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Truck3.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Truck4.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\Truck5.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\TurtleDisabled.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+    <Image Include="resources\Game\Enemies\TurtleEnabled.png">
+      <Filter>Game Resource Files\Game\Enemies</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\Sounds\frogger_hop.wav">
+      <Filter>Game Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\frogger_plunk.wav">
+      <Filter>Game Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\frogger_squash.wav">
+      <Filter>Game Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\Game_Over.mp3">
+      <Filter>Game Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\Lily_Islands.mp3">
+      <Filter>Game Resource Files\Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>
