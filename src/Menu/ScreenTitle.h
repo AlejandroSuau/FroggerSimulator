@@ -2,6 +2,7 @@
 #pragma once
 #include "StateMachineMngr.h"
 #include "Screen.h"
+#include "raylib.h"
 
 class ScreenTitleState : public StateMachineMngr
 {
@@ -26,6 +27,8 @@ private:
 	ScreenTitleState(){};
 	ScreenTitleState(const ScreenTitleState& other);
 	ScreenTitleState& operator= (const ScreenTitleState& other);
+
+	Texture2D logo_;
 
 	int framesCounter = 0;
 	int finishScreen = 0;
