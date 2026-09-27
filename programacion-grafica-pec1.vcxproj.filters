@@ -197,6 +197,9 @@
     <Image Include="resources\Game\Enemies\TurtleEnabled.png">
       <Filter>Game Resource Files\Game\Enemies</Filter>
     </Image>
+    <Image Include="resources\Logo-TheTrueBooleanGames.png">
+      <Filter>Game Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\Sounds\frogger_hop.wav">

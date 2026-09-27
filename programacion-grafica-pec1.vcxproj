@@ -357,6 +357,7 @@
     <Image Include="resources\Game\Player_L.png" />
     <Image Include="resources\Game\Player_R.png" />
     <Image Include="resources\Game\Point.png" />
+    <Image Include="resources\Logo-TheTrueBooleanGames.png" />
     <Image Include="resources\Menu\MainLogo.png" />
     <Image Include="resources\Title.jpg" />
     <Image Include="resources\wabbit_alpha.png" />
