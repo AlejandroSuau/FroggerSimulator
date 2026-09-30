@@ -31,13 +31,12 @@ void ScreenOptionsState::DrawScreen(void)
 {
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 
-    const char* line1 = "To move PACMAN use the direction keys or A,D,W,S.";
-    const char* line2 = "PACMAN has 3 lifes, every dot eaten increases 10 points";
-    const char* line3 = "the big dots adds 50 points to the score.";
-    const char* line4 = "To win PACMAN has to eat all the dots";
-    const char* line5 = "You loose if the ghost SHADOW kills you 3 times.";
+    const char* line1 = "To move FROGGER use the direction keys or A,D,W,S.";
+    const char* line2 = "Cross the road by dodging fast-moving cars and trucks.";
+    const char* line3 = "Avoid water and predators BY diving turtles and logs.";
+    const char* line4 = "Reach an empty home bay at the top before your timer runs out.";
+    const char* line5 = "Fill all five bays to complete the level and advance.";
     
-
     DrawText(line1, (GetScreenWidth() / 2) - (MeasureText(line1, 20) / 2.), 150, 20, WHITE);
     DrawText(line2, (GetScreenWidth() / 2) - (MeasureText(line2, 20) / 2.), 180, 20, WHITE);
     DrawText(line3, (GetScreenWidth() / 2) - (MeasureText(line3, 20) / 2.), 210, 20, WHITE);

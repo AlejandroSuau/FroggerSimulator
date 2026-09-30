@@ -45,7 +45,7 @@ void ScreenEndingState::DrawScreen(void)
 	DrawTextEx(font, "YOU WIN!", Vector2{ (GetScreenWidth() / 2.f) - 150, (GetScreenHeight() / 2.f) - 150 }, font.baseSize * 2.0f, 1, WHITE);
 
 	DrawText("Press Enter for Playing", (GetScreenWidth() / 2.f) - (MeasureText("Press Enter for Playing", 25) / 2), (GetScreenHeight() / 2.f) + 50, 25, WHITE);
-	DrawText("Press 'O' for Options", (GetScreenWidth() / 2.f) - (MeasureText("Press 'I' for Instructions", 25) / 2), (GetScreenHeight() / 2.f) + 100, 25, WHITE);
+	DrawText("Press 'O' for Options", (GetScreenWidth() / 2.f) - (MeasureText("Press '0' for Options", 25) / 2), (GetScreenHeight() / 2.f) + 100, 25, WHITE);
 
 }
 
