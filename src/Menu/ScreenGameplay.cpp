@@ -10,9 +10,7 @@
 
 
 ScreenGameplayState::ScreenGameplayState()
-{
-
-}
+	: screenLayout_(325, 150) {}
 
 ScreenGameplayState& ScreenGameplayState::getInstance()
 {
@@ -22,9 +20,10 @@ ScreenGameplayState& ScreenGameplayState::getInstance()
 
 void ScreenGameplayState::InitScreen(void)
 {
-	framesCounter = 0;
-	finishScreen = 0;
+	framesCounter_ = 0;
+	finishScreen_ = 0;
 
+	player_.Init();
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -32,9 +31,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	EvaluateInput();
 
 	//put here all the code for updating in the screen the gameplay
-
-
-	
+	player_.Update(deltaTime);	
 }
 
 void ScreenGameplayState::DrawScreen(void)
@@ -45,7 +42,8 @@ void ScreenGameplayState::DrawScreen(void)
 	GameManager& GameInst = GameManager::GetGameManager();
 
 	//put here all the code for drawing in the screen the gameplay
-
+	screenLayout_.Draw();
+	player_.Draw(screenLayout_);
 	
 	// UI Score, lives
 
@@ -59,20 +57,19 @@ void ScreenGameplayState::DrawScreen(void)
 
 void ScreenGameplayState::UnloadScreen(void)
 {
-
+	player_.Unload();
 }
 
 int  ScreenGameplayState::FinishScreen(void)
 {
-	return finishScreen;
+	return finishScreen_;
 }
 
 void ScreenGameplayState::EvaluateInput()
 {
-
 	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 	{
-		finishScreen = 4;   // END SCREEN
+		finishScreen_ = 4;   // END SCREEN
 	}
 }
 

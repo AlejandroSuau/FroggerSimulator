@@ -1,5 +1,9 @@
 #pragma once
+
 #include "StateMachineMngr.h"
+
+#include "Game/Player.h"
+#include "Game/ScreenLayout.h"
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -29,11 +33,13 @@ private:
 	void DebugOptions();
 	void DrawDebug();
 
-	int framesCounter = 0;
-	int finishScreen = 0;
-	bool mb_ReplayLevel = false;
+	Player player_;
+	ScreenLayout screenLayout_;
 
-	bool debug_floor = false;
-	bool debug_stairs = false;
+	int framesCounter_ = 0;
+	int finishScreen_ = 0;
+	bool mb_ReplayLevel_ = false;
 
+	bool DebugFloor = false;
+	bool DebugStairs = false;
 };
