@@ -24,6 +24,7 @@ void ScreenGameplayState::InitScreen(void)
 	finishScreen_ = 0;
 
 	player_.Init();
+	screenLayout_.Init();
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -42,7 +43,8 @@ void ScreenGameplayState::DrawScreen(void)
 	GameManager& GameInst = GameManager::GetGameManager();
 
 	//put here all the code for drawing in the screen the gameplay
-	screenLayout_.Draw();
+	screenLayout_.DrawBackground();
+	screenLayout_.DrawDebug();
 	player_.Draw(screenLayout_);
 	
 	// UI Score, lives
@@ -58,6 +60,7 @@ void ScreenGameplayState::DrawScreen(void)
 void ScreenGameplayState::UnloadScreen(void)
 {
 	player_.Unload();
+	screenLayout_.Unload();
 }
 
 int  ScreenGameplayState::FinishScreen(void)

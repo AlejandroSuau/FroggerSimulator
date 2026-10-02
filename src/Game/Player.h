@@ -23,8 +23,10 @@ public:
     void Draw(const ScreenLayout& layout) const;
 
 private:
-    int row_ = ScreenLayout::ROWS - 1;
-    int column_ = ScreenLayout::COLUMNS / 2;
+    const int startingRow_ = ScreenLayout::ROWS - 1;
+    const int startingCol_ = ScreenLayout::COLUMNS / 2;
+    int row_ = startingRow_;
+    int column_ = startingCol_;
     Direction m_direction = Direction::Up;
 
     Texture2D textureUp_{};
