@@ -11,10 +11,11 @@ class ScreenLayout;
 class RoadSection
 {
 public:
+    static constexpr int TRUCKS_PER_LANE = 3;
     struct RoadLane
     {
         float speed;
-        std::array<Truck, 3> trucks;
+        std::array<Truck, TRUCKS_PER_LANE> trucks;
     };
 
     static constexpr int LANE_COUNT = 5;
@@ -28,7 +29,6 @@ public:
 
 private:
     static constexpr float TRUCK_GAP = 180.f;
-    static constexpr int TRUCKS_PER_LANE = 3;
 
     std::array<Texture2D, LANE_COUNT> truckTextures_;
     std::array<RoadLane, LANE_COUNT> lanes_;

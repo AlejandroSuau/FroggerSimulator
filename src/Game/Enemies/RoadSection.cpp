@@ -75,8 +75,8 @@ void RoadSection::Update(float deltaTime, const ScreenLayout& layout)
 
 void RoadSection::Draw() const
 {
-    for (auto& lane : lanes_) {
-        for (auto& truck : lane.trucks) {
+    for (const auto& lane : lanes_) {
+        for (const auto& truck : lane.trucks) {
             truck.Draw();
         }
     }

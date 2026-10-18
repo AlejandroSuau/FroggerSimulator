@@ -26,6 +26,7 @@ void ScreenGameplayState::InitScreen(void)
 	player_.Init();
 	screenLayout_.Init();
 	roadSection_.Init(screenLayout_);
+	turtleSection_.Init(screenLayout_);
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -36,7 +37,9 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	//put here all the code for updating in the screen the gameplay
 	player_.Update(deltaTime);	
 	roadSection_.Update(deltaTime, screenLayout_);
-	if (roadSection_.CheckCollision(player_, screenLayout_)) {
+	turtleSection_.Update(deltaTime, screenLayout_);
+	if (roadSection_.CheckCollision(player_, screenLayout_) ||
+		turtleSection_.CheckCollision(player_, screenLayout_)) {
 		player_.ResetPosition();
 	}
 }
@@ -52,6 +55,7 @@ void ScreenGameplayState::DrawScreen(void)
 	screenLayout_.DrawBackground();
 
 	roadSection_.Draw();
+	turtleSection_.Draw();
 
 	player_.Draw(screenLayout_);
 
@@ -63,13 +67,12 @@ void ScreenGameplayState::DrawScreen(void)
 
 	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
 	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
-
-
 }
 
 void ScreenGameplayState::UnloadScreen(void)
 {
 	roadSection_.Unload();
+	turtleSection_.Unload();
 	player_.Unload();
 	screenLayout_.Unload();
 }
@@ -89,6 +92,7 @@ void ScreenGameplayState::EvaluateInput()
 
 void ScreenGameplayState::DebugOptions()
 {
+
 
 }
 

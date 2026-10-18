@@ -5,6 +5,7 @@
 #include "Game/Player.h"
 #include "Game/ScreenLayout.h"
 #include "Game/Enemies/RoadSection.h"
+#include "Game/Enemies/TurtleSection.h"
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -37,6 +38,7 @@ private:
 	Player player_;
 	ScreenLayout screenLayout_;
 	RoadSection roadSection_;
+	TurtleSection turtleSection_;
 
 	int framesCounter_ = 0;
 	int finishScreen_ = 0;
