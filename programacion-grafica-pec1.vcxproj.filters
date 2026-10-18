@@ -34,6 +34,9 @@
     <Filter Include="Game Resource Files\Game\Enemies">
       <UniqueIdentifier>{be3dc92d-e334-4ac3-9bb9-32bf40d61c6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Enemies">
+      <UniqueIdentifier>{2ba3ab4c-2996-46a0-b37b-640d0a30b629}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\resource_dir.h">
@@ -72,6 +75,12 @@
     <ClInclude Include="src\Game\Player.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\Enemies\Truck.h">
+      <Filter>Source Files\Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Enemies\RoadSection.h">
+      <Filter>Source Files\Game\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Frogger.cpp">
@@ -106,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="src\Game\Player.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Enemies\Truck.cpp">
+      <Filter>Source Files\Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Enemies\RoadSection.cpp">
+      <Filter>Source Files\Game\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

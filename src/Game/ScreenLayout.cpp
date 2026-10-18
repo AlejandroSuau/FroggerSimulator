@@ -94,3 +94,13 @@ bool ScreenLayout::IsDebugEnabled() const
 {
     return debugEnabled_;
 }
+
+float ScreenLayout::GetLeft() const
+{
+    return static_cast<float>(startX_);
+}
+
+float ScreenLayout::GetRight() const
+{
+    return static_cast<float>(startX_ + COLUMNS * CELL_SIZE);
+}

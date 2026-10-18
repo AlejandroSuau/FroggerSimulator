@@ -301,6 +301,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\Enemies\RoadSection.h" />
+    <ClInclude Include="src\Game\Enemies\Truck.h" />
     <ClInclude Include="src\Game\GlobalGameDefines.h" />
     <ClInclude Include="src\Game\Managers\GameManager.h" />
     <ClInclude Include="src\Game\Player.h" />
@@ -316,6 +318,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Frogger.cpp" />
+    <ClCompile Include="src\Game\Enemies\RoadSection.cpp" />
+    <ClCompile Include="src\Game\Enemies\Truck.cpp" />
     <ClCompile Include="src\Game\GlobalGameDefines.cpp" />
     <ClCompile Include="src\Game\Managers\GameManager.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />

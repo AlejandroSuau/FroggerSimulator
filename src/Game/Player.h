@@ -18,16 +18,19 @@ public:
 
     void Init();
     void Unload();
+    void ResetPosition();
 
     void Update(const ScreenLayout& layout);
     void Draw(const ScreenLayout& layout) const;
+    Rectangle GetBounds(const ScreenLayout& layout) const;
 
 private:
-    const int startingRow_ = ScreenLayout::ROWS - 1;
-    const int startingCol_ = ScreenLayout::COLUMNS / 2;
+    static constexpr int startingRow_ = ScreenLayout::ROWS - 1;
+    static constexpr int startingCol_ = ScreenLayout::COLUMNS / 2;
+
     int row_ = startingRow_;
     int column_ = startingCol_;
-    Direction m_direction = Direction::Up;
+    Direction direction_ = Direction::Up;
 
     Texture2D textureUp_{};
     Texture2D textureDown_{};

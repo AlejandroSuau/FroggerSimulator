@@ -20,22 +20,22 @@ void Player::Update(const ScreenLayout& layout)
 {
     if (IsKeyPressed(KEY_W)) 
     {
-        m_direction = Direction::Up;
+        direction_ = Direction::Up;
         Move(-1, 0, layout);
     } 
     else if (IsKeyPressed(KEY_S))
     {
-        m_direction = Direction::Down;
+        direction_ = Direction::Down;
         Move(1, 0, layout);
     } 
     else if (IsKeyPressed(KEY_A))
     {
-        m_direction = Direction::Left;
+        direction_ = Direction::Left;
         Move(0, -1, layout);
     }
     else if (IsKeyPressed(KEY_D))
     {
-        m_direction = Direction::Right;
+        direction_ = Direction::Right;
         Move(0, 1, layout);
     }
 }
@@ -55,7 +55,7 @@ void Player::Draw(const ScreenLayout& layout) const
     const Vector2 center = layout.GetCellCenter(row_, column_);
     const Texture2D* texture = &textureUp_;
 
-    switch (m_direction)
+    switch (direction_)
     {
     case Direction::Up:
         texture = &textureUp_;
@@ -81,4 +81,25 @@ void Player::Draw(const ScreenLayout& layout) const
     };
 
     DrawTextureV(*texture, position, WHITE);
+}
+
+Rectangle Player::GetBounds(const ScreenLayout& layout) const
+{
+    // All textures have same bounds
+    const Texture2D* texture = &textureUp_;
+    const Vector2 center = layout.GetCellCenter(row_, column_);
+
+    return {
+        static_cast<float>(center.x - texture->width / 2),
+        static_cast<float>(center.y - texture->height / 2),
+        static_cast<float>(texture->width),
+        static_cast<float>(texture->height)
+    };
+}
+
+void Player::ResetPosition()
+{
+    row_ = startingRow_;
+    column_ = startingCol_;
+    direction_ = Direction::Up;
 }

@@ -25,14 +25,20 @@ void ScreenGameplayState::InitScreen(void)
 
 	player_.Init();
 	screenLayout_.Init();
+	roadSection_.Init(screenLayout_);
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
 {
 	EvaluateInput();
+	// DebugOptions();
 
 	//put here all the code for updating in the screen the gameplay
 	player_.Update(deltaTime);	
+	roadSection_.Update(deltaTime, screenLayout_);
+	if (roadSection_.CheckCollision(player_, screenLayout_)) {
+		player_.ResetPosition();
+	}
 }
 
 void ScreenGameplayState::DrawScreen(void)
@@ -42,11 +48,15 @@ void ScreenGameplayState::DrawScreen(void)
 
 	GameManager& GameInst = GameManager::GetGameManager();
 
-	//put here all the code for drawing in the screen the gameplay
+	//put here all the code for drawing in the screen the gameplay	
 	screenLayout_.DrawBackground();
-	screenLayout_.DrawDebug();
+
+	roadSection_.Draw();
+
 	player_.Draw(screenLayout_);
-	
+
+	screenLayout_.DrawDebug();
+
 	// UI Score, lives
 
 	Font font = GameInst.GetFont();
@@ -59,6 +69,7 @@ void ScreenGameplayState::DrawScreen(void)
 
 void ScreenGameplayState::UnloadScreen(void)
 {
+	roadSection_.Unload();
 	player_.Unload();
 	screenLayout_.Unload();
 }

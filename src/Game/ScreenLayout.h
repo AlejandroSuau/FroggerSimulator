@@ -25,6 +25,9 @@ public:
 	void SetDebugEnabled(bool enabled);
 	bool IsDebugEnabled() const;
 
+	float GetLeft() const;
+	float GetRight() const;
+
 private:
 	const int startX_;
 	const int startY_;
@@ -39,7 +42,7 @@ private:
 		{12, false},
 	};
 
-	bool debugEnabled_ = true;
+	bool debugEnabled_ = false;
 
 	Texture2D bushTexture_;
 	Texture2D floorTexture_;
