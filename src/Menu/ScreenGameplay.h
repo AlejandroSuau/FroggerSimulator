@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raylib.h"
+
 #include "StateMachineMngr.h"
 
 #include "Game/Player.h"
@@ -36,6 +38,8 @@ private:
 	void DebugOptions();
 	void DrawDebug();
 
+	Texture2D lifeTexture_;
+
 	Player player_;
 	ScreenLayout screenLayout_;
 	RoadSection roadSection_;
@@ -48,4 +52,8 @@ private:
 
 	bool DebugFloor = false;
 	bool DebugStairs = false;
+
+	void KillPlayer();
+	void DrawLifeTimer() const;
+	void DrawLives() const;
 };

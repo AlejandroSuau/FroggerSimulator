@@ -19,10 +19,9 @@ GameManager* GameManager::GameMngr = nullptr;
 
 GameManager& GameManager::GetGameManager()
 {
-    if (!GameMngr)
-        GameMngr = new GameManager();
-
-    return *GameMngr; 
+    // Previous usage had a memory leak
+    static GameManager singleton;
+    return singleton;
 }
 
 GameManager::GameManager()
@@ -236,8 +235,62 @@ void GameManager::ClearGameVar()
 {
     score = 0;
     seconds = 0;
-    
-
 }
 
+void GameManager::LoseLife()
+{
+    if (lives_ > 0) {
+        --lives_;
+    }
 
+    ResetRemainingLifeTime();
+}
+
+void GameManager::StartNewGame() 
+{
+    ResetLives();
+    ResetRemainingLifeTime();
+}
+
+int GameManager::GetLives() const
+{
+    return lives_;
+}
+
+float GameManager::GetRemainingLifeTime() const
+{
+    return remainingLifeTimeInSeconds_;
+}
+
+void GameManager::UpdateLifeTime(float deltaTime)
+{
+    if (remainingLifeTimeInSeconds_ <= 0.f) { return; }
+    
+    remainingLifeTimeInSeconds_ -= deltaTime;
+    if (remainingLifeTimeInSeconds_ < 0) {
+        remainingLifeTimeInSeconds_ = 0.f;
+    }
+}
+
+bool GameManager::IsGameOver() const 
+{
+    return lives_ <= 0;
+}
+
+void GameManager::ResetLives()
+{
+    lives_ = GameGlobalVar::kInitialLives;
+}
+
+void GameManager::ResetRemainingLifeTime()
+{
+    remainingLifeTimeInSeconds_ = GameGlobalVar::kLifeTimeInSeconds;
+}
+
+void GameManager::SetEndResult(EndResult endResult) {
+    endResult_ = endResult;
+}
+
+float GameManager::GetLifeTime() const {
+    return GameGlobalVar::kLifeTimeInSeconds;
+}

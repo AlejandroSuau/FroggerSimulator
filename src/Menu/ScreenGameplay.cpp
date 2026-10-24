@@ -10,7 +10,7 @@
 
 
 ScreenGameplayState::ScreenGameplayState()
-	: screenLayout_(325, 150) {}
+	: screenLayout_(24, 24) {}
 
 ScreenGameplayState& ScreenGameplayState::getInstance()
 {
@@ -22,6 +22,11 @@ void ScreenGameplayState::InitScreen(void)
 {
 	framesCounter_ = 0;
 	finishScreen_ = 0;
+
+	GameManager& game = GameManager::GetGameManager();
+	game.StartNewGame();
+
+	lifeTexture_ = LoadTexture("resources/Game/Life.png");
 
 	player_.Init();
 	screenLayout_.Init();
@@ -40,10 +45,31 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	roadSection_.Update(deltaTime, screenLayout_);
 	turtleSection_.Update(deltaTime, screenLayout_);
 	woodLogSection_.Update(deltaTime, screenLayout_);
+
+	GameManager& game = GameManager::GetGameManager();
+	game.UpdateLifeTime(deltaTime);
+
 	// Check frog carrying
+
 	if (roadSection_.CheckCollision(player_, screenLayout_) ||
-		turtleSection_.CheckCollision(player_, screenLayout_)) {
-		player_.ResetPosition();
+		turtleSection_.CheckCollision(player_, screenLayout_) || 
+		game.GetRemainingLifeTime() <= 0.f) {
+		
+		KillPlayer();
+	}
+}
+
+void ScreenGameplayState::KillPlayer()
+{
+	GameManager& game = GameManager::GetGameManager();
+	
+	game.LoseLife();
+	player_.ResetPosition();
+	// PlaySound(frogSquashSound_);
+
+	if (game.IsGameOver()) {
+		finishScreen_ = 4;
+		game.SetEndResult(EndResult::GameOver);
 	}
 }
 
@@ -62,6 +88,8 @@ void ScreenGameplayState::DrawScreen(void)
 	woodLogSection_.Draw();
 
 	player_.Draw(screenLayout_);
+	DrawLifeTimer();
+	DrawLives();
 
 	screenLayout_.DrawDebug();
 
@@ -71,6 +99,59 @@ void ScreenGameplayState::DrawScreen(void)
 
 	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
 	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
+}
+
+void ScreenGameplayState::DrawLives() const
+{
+	const int lives = GameManager::GetGameManager().GetLives();
+	const float startX = screenLayout_.GetRight();
+	const float y = static_cast<float>(GetScreenHeight()) - 40;
+
+	for (int i = 0; i < lives; ++i)
+	{
+		DrawTexture(
+			lifeTexture_,
+			static_cast<int>(startX - (i + 1) * 40),
+			static_cast<int>(y),
+			WHITE);
+	}
+}
+
+void ScreenGameplayState::DrawLifeTimer() const
+{
+	GameManager& game = GameManager::GetGameManager();
+
+	const float remaining = game.GetRemainingLifeTime();
+	const float total = game.GetLifeTime();
+
+	const float ratio = remaining / total;
+
+	const float barX = 150.0f;
+	const float barY = static_cast<float>(GetScreenHeight() - 40);
+
+	const float barWidth = 300.0f;
+	const float barHeight = 20.0f;
+
+	DrawText(
+		"TIMER:",
+		50,
+		static_cast<int>(barY),
+		20,
+		GREEN);
+
+	DrawRectangle(
+		static_cast<int>(barX),
+		static_cast<int>(barY),
+		static_cast<int>(barWidth),
+		static_cast<int>(barHeight),
+		DARKGRAY);
+
+	DrawRectangle(
+		static_cast<int>(barX),
+		static_cast<int>(barY),
+		static_cast<int>(barWidth * ratio),
+		static_cast<int>(barHeight),
+		GREEN);
 }
 
 void ScreenGameplayState::UnloadScreen(void)

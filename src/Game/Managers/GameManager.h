@@ -2,10 +2,16 @@
 
 #include "raylib.h"
 
+#include "Game/GlobalGameDefines.h"
 #include "Menu/StateMachineMngr.h" 
 
 using namespace std;
 
+enum class EndResult
+{
+	Win,
+	GameOver
+};
 
 class GameManager
 {
@@ -22,6 +28,20 @@ public:
 
 	void ClearGameVar();
 
+	void LoseLife();
+	int GetLives() const;
+	float GetLifeTime() const;
+	float GetRemainingLifeTime() const;
+	void UpdateLifeTime(float deltaTime);
+
+	bool IsGameOver() const;
+
+	void ResetLives();
+	void ResetRemainingLifeTime();
+
+	void StartNewGame();
+	void SetEndResult(EndResult endResult);
+
 	Font& GetFont() { return font; }
 
 	int GetScore() { return score; }
@@ -32,7 +52,6 @@ public:
 
 	void IncreaseScore(int newValue) { score += newValue; }
 	void DecreaseScore(int newValue) { score -= newValue; }
-
 
 	static GameManager& GetGameManager();
 
@@ -54,9 +73,11 @@ private:
 	int score = 0;
 	int seconds = 0;
 
-private:
-
 	static GameManager *GameMngr;
+
+	int lives_ = 0;
+	float remainingLifeTimeInSeconds_ = 0.f;
+	EndResult endResult_ = EndResult::GameOver;
 
 	//------------
 

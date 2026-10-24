@@ -7,10 +7,11 @@
 
 namespace GameGlobalVar
 {
-	const int screenWidth = 1280;
-	const int screenHeight = 800;
+	const int screenWidth = 720;
+	const int screenHeight = 720;
 
-	const int gravity = 400;
+	constexpr int kInitialLives = 3;
+	constexpr float kLifeTimeInSeconds = 60.f;
 }
 
 #endif
