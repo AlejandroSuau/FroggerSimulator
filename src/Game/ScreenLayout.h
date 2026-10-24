@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include <unordered_map>
+#include <optional>
 
 class ScreenLayout
 {
@@ -28,10 +29,17 @@ public:
 	float GetLeft() const;
 	float GetRight() const;
 
+	bool IsHomeColumn(int column) const;
+	std::optional<bool> GetHomeStatus(int column) const;
+	bool FillHome(int row, int column);
+	bool AreAllHomesFilled() const;
+	void UnfillHomes();
+
 private:
 	const int startX_;
 	const int startY_;
 
+	// Column => IsFilled
 	std::unordered_map<int, bool> homeColumnAndFilledStatus_ {
 		{0,  false},
 		{2,  false},
@@ -49,6 +57,5 @@ private:
 	Texture2D homeTexture_;
 	Texture2D pointTexture_;
 
-	bool IsHomeColumn(int column) const;
 	void DrawHomeTexture(int column, int x, int y) const;
 };

@@ -41,6 +41,7 @@ public:
 
 	void StartNewGame();
 	void SetEndResult(EndResult endResult);
+	EndResult GetEndResult() const;
 
 	Font& GetFont() { return font; }
 
@@ -54,6 +55,9 @@ public:
 	void DecreaseScore(int newValue) { score -= newValue; }
 
 	static GameManager& GetGameManager();
+
+	Music& GetMainThemeMusic();
+	Music& GetGameOverMusic();
 
 private:
 	//----------------------------------------------------
@@ -82,8 +86,8 @@ private:
 	//------------
 
 	Font font = { 0 };
-	Music music = { 0 };
-	Sound fxCoin = { 0 };
+	Music mainThemeMusic_{};
+	Music gameOverMusic_{};
 
 	StateMachineMngr* ScreenState;
 

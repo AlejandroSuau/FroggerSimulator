@@ -28,9 +28,8 @@ private:
 	ScreenTitleState(const ScreenTitleState& other);
 	ScreenTitleState& operator= (const ScreenTitleState& other);
 
-	Texture2D logo_;
+	Texture2D logo_{};
 
 	int framesCounter = 0;
 	int finishScreen = 0;
-
 };

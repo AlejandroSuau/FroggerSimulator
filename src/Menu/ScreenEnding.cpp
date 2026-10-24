@@ -15,12 +15,19 @@ ScreenEndingState& ScreenEndingState::getInstance()
 
 void ScreenEndingState::InitScreen(void)
 {
-	framesCounter = 0;
 	finishScreen = 0;
+	GameManager& GameInst = GameManager::GetGameManager();
+
+	if (GameInst.GetEndResult() == EndResult::GameOver) {
+		StopMusicStream(GameInst.GetMainThemeMusic());
+		PlayMusicStream(GameInst.GetGameOverMusic());
+	}
 }
 
 void ScreenEndingState::UpdateScreen(float deltaTime)
 {
+	GameManager& GameInst = GameManager::GetGameManager();
+	UpdateMusicStream(GameInst.GetGameOverMusic());
 	if (IsKeyPressed(KEY_ENTER) )
 	{
 		finishScreen = 1; // GAMEPLAY
@@ -39,10 +46,11 @@ void ScreenEndingState::DrawScreen(void)
 
 	Font font = GameInst.GetFont();
 
-	// Write this in case of win
-	DrawTextEx(font, "GAME OVER", Vector2{ (GetScreenWidth() / 2.f) - 150, (GetScreenHeight() / 2.f) -150 }, font.baseSize * 2.0f, 1, RED);
-
-	DrawTextEx(font, "YOU WIN!", Vector2{ (GetScreenWidth() / 2.f) - 150, (GetScreenHeight() / 2.f) - 150 }, font.baseSize * 2.0f, 1, WHITE);
+	if (GameInst.GetEndResult() == EndResult::Win) {
+		DrawText("YOU WIN!", (GetScreenWidth() / 2.f) - (MeasureText("YOU WIN!", 25) / 2), (GetScreenHeight() / 2.f), 25, GREEN);
+	} else {
+		DrawText("GAME OVER", (GetScreenWidth() / 2.f) - (MeasureText("GAME OVER", 25) / 2), (GetScreenHeight() / 2.f), 25, RED);
+	}
 
 	DrawText("Press Enter for Playing", (GetScreenWidth() / 2.f) - (MeasureText("Press Enter for Playing", 25) / 2), (GetScreenHeight() / 2.f) + 50, 25, WHITE);
 	DrawText("Press 'O' for Options", (GetScreenWidth() / 2.f) - (MeasureText("Press '0' for Options", 25) / 2), (GetScreenHeight() / 2.f) + 100, 25, WHITE);
@@ -51,9 +59,6 @@ void ScreenEndingState::DrawScreen(void)
 
 void ScreenEndingState::UnloadScreen(void)
 {
-	//Let's unload all the enemies lines
-	GameManager& GameInst = GameManager::GetGameManager();
-
 }
 
 int  ScreenEndingState::FinishScreen(void)

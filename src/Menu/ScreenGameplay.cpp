@@ -20,13 +20,23 @@ ScreenGameplayState& ScreenGameplayState::getInstance()
 
 void ScreenGameplayState::InitScreen(void)
 {
-	framesCounter_ = 0;
+	screenLayout_.UnfillHomes();
 	finishScreen_ = 0;
 
 	GameManager& game = GameManager::GetGameManager();
 	game.StartNewGame();
 
+	auto& mainThemeMusic = game.GetMainThemeMusic();
+	if (!IsMusicStreamPlaying(mainThemeMusic)) {
+		PlayMusicStream(mainThemeMusic);
+		StopMusicStream(game.GetGameOverMusic());
+	}
+
 	lifeTexture_ = LoadTexture("resources/Game/Life.png");
+	
+	frogSquashSound_ = LoadSound("resources/Sounds/frogger_squash.wav");
+	frogPlunkSound_ = LoadSound("resources/Sounds/frogger_plunk.wav");
+	frogHopSound_ = LoadSound("resources/Sounds/frogger_hop.wav");
 
 	player_.Init();
 	screenLayout_.Init();
@@ -37,24 +47,37 @@ void ScreenGameplayState::InitScreen(void)
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
 {
+	GameManager& game = GameManager::GetGameManager();
+	UpdateMusicStream(game.GetMainThemeMusic());
+
 	EvaluateInput();
 	// DebugOptions();
 
-	//put here all the code for updating in the screen the gameplay
-	player_.Update(deltaTime);	
+	if (player_.Update(deltaTime)) {
+		PlaySound(frogHopSound_);
+	}
+
 	roadSection_.Update(deltaTime, screenLayout_);
 	turtleSection_.Update(deltaTime, screenLayout_);
 	woodLogSection_.Update(deltaTime, screenLayout_);
 
-	GameManager& game = GameManager::GetGameManager();
 	game.UpdateLifeTime(deltaTime);
 
 	// Check frog carrying
+	const auto [col, row] = player_.GetColumnRow();
+	if (screenLayout_.FillHome(row, col)) {
+		PlaySound(frogPlunkSound_);
+		if (screenLayout_.AreAllHomesFilled()) {
+			finishScreen_ = 4;
+			game.SetEndResult(EndResult::Win);
+		} else {
+			player_.ResetPosition();
+		}
+	}
 
 	if (roadSection_.CheckCollision(player_, screenLayout_) ||
 		turtleSection_.CheckCollision(player_, screenLayout_) || 
 		game.GetRemainingLifeTime() <= 0.f) {
-		
 		KillPlayer();
 	}
 }
@@ -65,7 +88,7 @@ void ScreenGameplayState::KillPlayer()
 	
 	game.LoseLife();
 	player_.ResetPosition();
-	// PlaySound(frogSquashSound_);
+	PlaySound(frogSquashSound_);
 
 	if (game.IsGameOver()) {
 		finishScreen_ = 4;
@@ -156,6 +179,11 @@ void ScreenGameplayState::DrawLifeTimer() const
 
 void ScreenGameplayState::UnloadScreen(void)
 {
+	UnloadTexture(lifeTexture_);
+	UnloadSound(frogSquashSound_);
+	UnloadSound(frogPlunkSound_);
+	UnloadSound(frogHopSound_);
+
 	roadSection_.Unload();
 	turtleSection_.Unload();
 	woodLogSection_.Unload();
@@ -170,7 +198,7 @@ int  ScreenGameplayState::FinishScreen(void)
 
 void ScreenGameplayState::EvaluateInput()
 {
-	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+	if (IsKeyPressed(KEY_ENTER))
 	{
 		finishScreen_ = 4;   // END SCREEN
 	}

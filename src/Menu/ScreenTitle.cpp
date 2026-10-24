@@ -15,17 +15,14 @@ void ScreenTitleState::InitScreen(void)
 	TraceLog(LOG_INFO, "ScreenTitleState::InitScreen");
 	
 	logo_ = LoadTexture("resources/Menu/MainLogo.png");
-
-	// Use this to access to the Game instance
 	GameManager& GameInst = GameManager::GetGameManager();
-
-
+	PlayMusicStream(GameInst.GetMainThemeMusic());
 }
 
 void ScreenTitleState::UpdateScreen(float deltaTime)
 {
 	GameManager& GameInst = GameManager::GetGameManager();
-
+	UpdateMusicStream(GameInst.GetMainThemeMusic());
 
 	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 	{

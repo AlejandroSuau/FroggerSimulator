@@ -35,6 +35,9 @@ void GameManager::InitGame()
     // Load global data (assets that must be available in all screens, i.e. font)
     font = LoadFont("resources/Font/PacManFont.ttf");
 
+    mainThemeMusic_ = LoadMusicStream("resources/Sounds/Lily_Islands.mp3");
+    gameOverMusic_ = LoadMusicStream("resources/Sounds/Game_Over.mp3");
+
     // Setup and init first screen
     ScreenState = &ScreenLogoState::getInstance();
     ScreenState->InitScreen();
@@ -45,8 +48,9 @@ void GameManager::UpdateFrame(float deltaTime)
 {
  // Update
  //----------------------------------------------------------------------------------
-    
-     if (!onTransition)
+    UpdateMusicStream(mainThemeMusic_);
+
+    if (!onTransition)
     {
         ScreenState->UpdateScreen(deltaTime);
         
@@ -158,8 +162,8 @@ void GameManager::UnloadGame(void)
 
     // Unload global data loaded
     UnloadFont(font);
-    UnloadMusicStream(music);
-    UnloadSound(fxCoin);
+    UnloadMusicStream(mainThemeMusic_);
+    UnloadMusicStream(gameOverMusic_);
 
     CloseAudioDevice();     // Close audio context
 }
@@ -293,4 +297,19 @@ void GameManager::SetEndResult(EndResult endResult) {
 
 float GameManager::GetLifeTime() const {
     return GameGlobalVar::kLifeTimeInSeconds;
+}
+
+Music& GameManager::GetMainThemeMusic()
+{
+    return mainThemeMusic_;
+}
+
+Music& GameManager::GetGameOverMusic()
+{
+    return gameOverMusic_;
+}
+
+EndResult GameManager::GetEndResult() const
+{
+    return endResult_;
 }

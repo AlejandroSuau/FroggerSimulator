@@ -1,5 +1,7 @@
 #include "ScreenLayout.h"
 
+#include <algorithm>
+
 ScreenLayout::ScreenLayout(int startX, int startY)
     : startX_(startX)
     , startY_(startY) {}
@@ -67,6 +69,44 @@ void ScreenLayout::DrawDebug() const
     }
 }
 
+bool ScreenLayout::FillHome(int row, int column)
+{
+    if (row != 0) { return false; }
+
+    auto it = homeColumnAndFilledStatus_.find(column);
+    if (it == homeColumnAndFilledStatus_.cend() || it->second) {
+        return false;
+    }
+
+    homeColumnAndFilledStatus_[column] = true;
+    return true;
+}
+
+std::optional<bool> ScreenLayout::GetHomeStatus(int column) const
+{
+    const auto it = homeColumnAndFilledStatus_.find(column);
+    if (it != homeColumnAndFilledStatus_.cend()) {
+        return it->second;
+    }
+
+    return std::nullopt;
+}
+
+bool ScreenLayout::AreAllHomesFilled() const
+{
+    return std::all_of(
+        homeColumnAndFilledStatus_.cbegin(),
+        homeColumnAndFilledStatus_.cend(), 
+        [](const auto& entry) { return entry.second; });
+}
+
+void ScreenLayout::UnfillHomes()
+{
+    for (auto it = homeColumnAndFilledStatus_.begin(); it != homeColumnAndFilledStatus_.end(); ++it) {
+        it->second = false;
+    }
+}
+
 Vector2 ScreenLayout::GetCellCenter(int row, int column) const
 {
     return {
@@ -82,7 +122,11 @@ bool ScreenLayout::IsHomeColumn(int column) const {
 
 bool ScreenLayout::IsValidCell(int row, int column) const
 {
-    return (row >= 0 && row < ROWS && column >= 0 && column < COLUMNS);
+    if (auto homeStatus = GetHomeStatus(column)) {
+        return !(*homeStatus);
+    }
+
+    return (row > 0 && row < ROWS && column >= 0 && column < COLUMNS);
 }
 
 void ScreenLayout::SetDebugEnabled(bool enabled)

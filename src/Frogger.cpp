@@ -25,6 +25,7 @@ int main(void)
     // Initialization
     //---------------------------------------------------------
     InitWindow(GameGlobalVar::screenWidth, GameGlobalVar::screenHeight, "FROGGER SIMULATOR");
+    InitAudioDevice();
 
     GameManager & GameMngr = GameManager::GetGameManager();
     GameMngr.InitGame();
@@ -48,7 +49,9 @@ int main(void)
     // De-Initialization
     GameManager::GetGameManager().UnloadGame();
 
+    CloseAudioDevice();
     CloseWindow();          // Close window and OpenGL context
+    
     //--------------------------------------------------------------------------------------
 
     return 0;

@@ -25,7 +25,5 @@ private:
 	ScreenEndingState(const ScreenEndingState& other);
 	ScreenEndingState& operator= (const ScreenEndingState& other);
 
-	int framesCounter = 0;
 	int finishScreen = 0;
-
 };

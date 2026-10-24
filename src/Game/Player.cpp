@@ -16,28 +16,34 @@ void Player::Unload()
     UnloadTexture(textureRight_);
 }
 
-void Player::Update(const ScreenLayout& layout)
+bool Player::Update(const ScreenLayout& layout)
 {
     if (IsKeyPressed(KEY_W)) 
     {
         direction_ = Direction::Up;
         Move(-1, 0, layout);
+        return true;
     } 
     else if (IsKeyPressed(KEY_S))
     {
         direction_ = Direction::Down;
         Move(1, 0, layout);
+        return true;
     } 
     else if (IsKeyPressed(KEY_A))
     {
         direction_ = Direction::Left;
         Move(0, -1, layout);
+        return true;
     }
     else if (IsKeyPressed(KEY_D))
     {
         direction_ = Direction::Right;
         Move(0, 1, layout);
+        return true;
     }
+
+    return false;
 }
 
 void Player::Move(int rowOffset, int columnOffset, const ScreenLayout& layout)
@@ -102,4 +108,9 @@ void Player::ResetPosition()
     row_ = startingRow_;
     column_ = startingCol_;
     direction_ = Direction::Up;
+}
+
+std::pair<int, int> Player::GetColumnRow() const
+{
+    return { column_, row_ };
 }

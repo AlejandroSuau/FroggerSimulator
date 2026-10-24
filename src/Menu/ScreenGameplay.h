@@ -38,7 +38,7 @@ private:
 	void DebugOptions();
 	void DrawDebug();
 
-	Texture2D lifeTexture_;
+	Texture2D lifeTexture_{};
 
 	Player player_;
 	ScreenLayout screenLayout_;
@@ -46,12 +46,12 @@ private:
 	TurtleSection turtleSection_;
 	WoodLogSection woodLogSection_;
 
-	int framesCounter_ = 0;
+	Sound frogSquashSound_{};
+	Sound frogPlunkSound_{};
+	Sound frogHopSound_{};
+
 	int finishScreen_ = 0;
 	bool mb_ReplayLevel_ = false;
-
-	bool DebugFloor = false;
-	bool DebugStairs = false;
 
 	void KillPlayer();
 	void DrawLifeTimer() const;

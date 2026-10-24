@@ -4,6 +4,7 @@
 #include "ScreenLayout.h"
 
 #include <array>
+#include <utility>
 
 class Player
 {
@@ -20,9 +21,10 @@ public:
     void Unload();
     void ResetPosition();
 
-    void Update(const ScreenLayout& layout);
+    bool Update(const ScreenLayout& layout);
     void Draw(const ScreenLayout& layout) const;
     Rectangle GetBounds(const ScreenLayout& layout) const;
+    std::pair<int, int> GetColumnRow() const;
 
 private:
     static constexpr int startingRow_ = ScreenLayout::ROWS - 1;
