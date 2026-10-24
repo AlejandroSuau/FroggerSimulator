@@ -27,6 +27,7 @@ void ScreenGameplayState::InitScreen(void)
 	screenLayout_.Init();
 	roadSection_.Init(screenLayout_);
 	turtleSection_.Init(screenLayout_);
+	woodLogSection_.Init(screenLayout_);
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -38,6 +39,8 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	player_.Update(deltaTime);	
 	roadSection_.Update(deltaTime, screenLayout_);
 	turtleSection_.Update(deltaTime, screenLayout_);
+	woodLogSection_.Update(deltaTime, screenLayout_);
+	// Check frog carrying
 	if (roadSection_.CheckCollision(player_, screenLayout_) ||
 		turtleSection_.CheckCollision(player_, screenLayout_)) {
 		player_.ResetPosition();
@@ -56,6 +59,7 @@ void ScreenGameplayState::DrawScreen(void)
 
 	roadSection_.Draw();
 	turtleSection_.Draw();
+	woodLogSection_.Draw();
 
 	player_.Draw(screenLayout_);
 
@@ -73,6 +77,7 @@ void ScreenGameplayState::UnloadScreen(void)
 {
 	roadSection_.Unload();
 	turtleSection_.Unload();
+	woodLogSection_.Unload();
 	player_.Unload();
 	screenLayout_.Unload();
 }

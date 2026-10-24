@@ -87,6 +87,12 @@
     <ClInclude Include="src\Game\Enemies\TurtleSection.h">
       <Filter>Source Files\Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\WoodLog.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\WoodLogSection.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Frogger.cpp">
@@ -133,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="src\Game\Enemies\TurtleSection.cpp">
       <Filter>Source Files\Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\WoodLog.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\WoodLogSection.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

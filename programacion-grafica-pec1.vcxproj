@@ -309,6 +309,8 @@
     <ClInclude Include="src\Game\Managers\GameManager.h" />
     <ClInclude Include="src\Game\Player.h" />
     <ClInclude Include="src\Game\ScreenLayout.h" />
+    <ClInclude Include="src\Game\WoodLog.h" />
+    <ClInclude Include="src\Game\WoodLogSection.h" />
     <ClInclude Include="src\Menu\Screen.h" />
     <ClInclude Include="src\Menu\ScreenEnding.h" />
     <ClInclude Include="src\Menu\ScreenGameplay.h" />
@@ -328,6 +330,8 @@
     <ClCompile Include="src\Game\Managers\GameManager.cpp" />
     <ClCompile Include="src\Game\Player.cpp" />
     <ClCompile Include="src\Game\ScreenLayout.cpp" />
+    <ClCompile Include="src\Game\WoodLog.cpp" />
+    <ClCompile Include="src\Game\WoodLogSection.cpp" />
     <ClCompile Include="src\Menu\Screen.cpp" />
     <ClCompile Include="src\Menu\ScreenEnding.cpp" />
     <ClCompile Include="src\Menu\ScreenGameplay.cpp" />

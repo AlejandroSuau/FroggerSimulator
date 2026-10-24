@@ -45,7 +45,6 @@ private:
 	void UpdateTransition(void);         // Update transition effect
 	void DrawTransition(void);           // Draw transition effect (full-screen rectangle)
 
-
 	float transAlpha = 0.0f;
 	bool onTransition = false;
 	bool transFadeOut = false;

@@ -9,7 +9,7 @@ void TurtleSection::Init(const ScreenLayout& layout)
 {
     turtleTexture_ = LoadTexture("resources/Game/Enemies/TurtleEnabled.png");
 
-    static constexpr std::array<int, LANE_COUNT> rows {0, 4};
+    static constexpr std::array<int, LANE_COUNT> rows {1, 4};
     static constexpr std::array<float, LANE_COUNT> speeds { -70.0f, -110.0f};
 
     for (int i = 0; i< LANE_COUNT; ++i) {
