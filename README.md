@@ -4,6 +4,10 @@ A simplified **Frogger** clone developed in **C++ with raylib**.
 
 The project recreates the main gameplay loop of the original game using a grid-based movement system, moving enemies, wood logs, lives, timer, score, high score and different game screens.
 
+## Demo
+
+[![Watch the gameplay demo](https://img.youtube.com/vi/hcmn1D7hMF0/0.jpg)](https://youtu.be/hcmn1D7hMF0)
+
 ## Features
 
 - Grid-based frog movement using **WASD**
@@ -19,10 +23,6 @@ The project recreates the main gameplay loop of the original game using a grid-b
 - Music and sound effects
 - Logo, Title, Options, Gameplay and Ending screens
 - Debug grid toggle with **T**
-
-## Demo
-
-[![Watch the gameplay demo](https://img.youtube.com/vi/hcmn1D7hMF0/0.jpg)](https://youtu.be/hcmn1D7hMF0)
 
 ## Controls
 
