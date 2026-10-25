@@ -50,7 +50,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	UpdateMusicStream(game.GetMainThemeMusic());
 
 	EvaluateInput();
-	// DebugOptions();
+	DebugOptions();
 
 	if (player_.Update(screenLayout_)) {
 		PlaySound(frogHopSound_);
@@ -226,8 +226,10 @@ void ScreenGameplayState::EvaluateInput()
 
 void ScreenGameplayState::DebugOptions()
 {
-
-
+	if (IsKeyPressed(KEY_T))
+	{
+		screenLayout_.SetDebugEnabled(!screenLayout_.IsDebugEnabled());
+	}
 }
 
 void ScreenGameplayState::DrawDebug()
