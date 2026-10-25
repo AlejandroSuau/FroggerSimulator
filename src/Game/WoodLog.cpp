@@ -23,10 +23,12 @@ void WoodLog::Draw() const
 
 Rectangle WoodLog::GetBounds() const
 {
+    // We substract player width from log so it doesn't push it
+    // from its boundaries.
     return {
         position_.x,
         position_.y,
-        static_cast<float>(texture_.width),
+        static_cast<float>(texture_.width) - 48,
         static_cast<float>(texture_.height)
     };
 }
