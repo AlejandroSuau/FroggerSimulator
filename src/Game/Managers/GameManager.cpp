@@ -31,8 +31,6 @@ void GameManager::InitGame()
 {
 
     // Load global data (assets that must be available in all screens, i.e. font)
-    font = LoadFont("resources/Font/PacManFont.ttf");
-
     mainThemeMusic_ = LoadMusicStream("resources/Sounds/Lily_Islands.mp3");
     gameOverMusic_ = LoadMusicStream("resources/Sounds/Game_Over.mp3");
     gameOverMusic_.looping = false;
