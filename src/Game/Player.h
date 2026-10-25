@@ -20,6 +20,7 @@ public:
     void Init();
     void Unload();
     void ResetPosition();
+    void AddHorizontalOffset(float amount, const ScreenLayout& layout);
 
     bool Update(const ScreenLayout& layout);
     void Draw(const ScreenLayout& layout) const;
@@ -33,6 +34,7 @@ private:
     int row_ = startingRow_;
     int column_ = startingCol_;
     Direction direction_ = Direction::Up;
+    float horizontalOffset_ = 0.f;
 
     Texture2D textureUp_{};
     Texture2D textureDown_{};

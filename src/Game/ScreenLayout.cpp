@@ -1,10 +1,12 @@
 #include "ScreenLayout.h"
 
 #include <algorithm>
+#include <assert.h>
 
 ScreenLayout::ScreenLayout(int startX, int startY)
     : startX_(startX)
-    , startY_(startY) {}
+    , startY_(startY) {
+}
 
 void ScreenLayout::Init() {
     bushTexture_ = LoadTexture("resources/Game/Bush.png");
@@ -82,8 +84,10 @@ bool ScreenLayout::FillHome(int row, int column)
     return true;
 }
 
-std::optional<bool> ScreenLayout::GetHomeStatus(int column) const
+std::optional<bool> ScreenLayout::GetHomeStatus(int column, int row) const
 {
+    if (row != 0) { return std::nullopt; }
+
     const auto it = homeColumnAndFilledStatus_.find(column);
     if (it != homeColumnAndFilledStatus_.cend()) {
         return it->second;
@@ -122,7 +126,7 @@ bool ScreenLayout::IsHomeColumn(int column) const {
 
 bool ScreenLayout::IsValidCell(int row, int column) const
 {
-    if (auto homeStatus = GetHomeStatus(column)) {
+    if (auto homeStatus = GetHomeStatus(column, row)) {
         return !(*homeStatus);
     }
 

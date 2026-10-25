@@ -30,7 +30,7 @@ public:
 	float GetRight() const;
 
 	bool IsHomeColumn(int column) const;
-	std::optional<bool> GetHomeStatus(int column) const;
+	std::optional<bool> GetHomeStatus(int column, int row) const;
 	bool FillHome(int row, int column);
 	bool AreAllHomesFilled() const;
 	void UnfillHomes();

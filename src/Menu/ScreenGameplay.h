@@ -56,4 +56,5 @@ private:
 	void KillPlayer();
 	void DrawLifeTimer() const;
 	void DrawLives() const;
+	void OnFrogReachingHouse();
 };

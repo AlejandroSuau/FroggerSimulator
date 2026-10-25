@@ -24,7 +24,7 @@ void ScreenTitleState::UpdateScreen(float deltaTime)
 	GameManager& GameInst = GameManager::GetGameManager();
 	UpdateMusicStream(GameInst.GetMainThemeMusic());
 
-	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+	if (IsKeyPressed(KEY_ENTER))
 	{
 		finishScreen = 2;   // GAMEPLAY
 	}
@@ -57,8 +57,6 @@ void ScreenTitleState::DrawScreen(void)
 	static const char* text_2 = "Press 'O' for Instructions";
 	DrawText(text_1, (GetScreenWidth() / 2) - (MeasureText(text_1, 25) / 2), 500, 25, WHITE);
 	DrawText(text_2, (GetScreenWidth() / 2) - (MeasureText(text_2, 25) / 2), 560, 25, WHITE);
-
-
 }
 
 void ScreenTitleState::UnloadScreen(void)

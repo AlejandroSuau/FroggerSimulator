@@ -24,7 +24,7 @@ int main(void)
 {
     // Initialization
     //---------------------------------------------------------
-    InitWindow(GameGlobalVar::screenWidth, GameGlobalVar::screenHeight, "FROGGER SIMULATOR");
+    InitWindow(GameGlobalVar::kScreenWidth, GameGlobalVar::kScreenHeight, "FROGGER SIMULATOR");
     InitAudioDevice();
 
     GameManager & GameMngr = GameManager::GetGameManager();

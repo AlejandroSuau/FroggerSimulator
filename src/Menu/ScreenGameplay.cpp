@@ -10,7 +10,7 @@
 
 
 ScreenGameplayState::ScreenGameplayState()
-	: screenLayout_(24, 24) {}
+	: screenLayout_(24, 88) {}
 
 ScreenGameplayState& ScreenGameplayState::getInstance()
 {
@@ -53,7 +53,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	EvaluateInput();
 	// DebugOptions();
 
-	if (player_.Update(deltaTime)) {
+	if (player_.Update(screenLayout_)) {
 		PlaySound(frogHopSound_);
 	}
 
@@ -61,12 +61,18 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	turtleSection_.Update(deltaTime, screenLayout_);
 	woodLogSection_.Update(deltaTime, screenLayout_);
 
+	const float carrySpeed = woodLogSection_.GetCarrySpeed(player_, screenLayout_);
+	if (carrySpeed != 0.f) {
+		player_.AddHorizontalOffset(carrySpeed * deltaTime, screenLayout_);
+	}
+
 	game.UpdateLifeTime(deltaTime);
 
 	// Check frog carrying
 	const auto [col, row] = player_.GetColumnRow();
 	if (screenLayout_.FillHome(row, col)) {
-		PlaySound(frogPlunkSound_);
+		OnFrogReachingHouse();
+
 		if (screenLayout_.AreAllHomesFilled()) {
 			finishScreen_ = 4;
 			game.SetEndResult(EndResult::Win);
@@ -80,6 +86,14 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 		game.GetRemainingLifeTime() <= 0.f) {
 		KillPlayer();
 	}
+}
+
+void ScreenGameplayState::OnFrogReachingHouse()
+{
+	GameManager& game = GameManager::GetGameManager();
+	game.IncreaseScore(GameGlobalVar::kOnReachHouseScore);
+	PlaySound(frogPlunkSound_);
+	player_.ResetPosition();
 }
 
 void ScreenGameplayState::KillPlayer()
@@ -120,8 +134,8 @@ void ScreenGameplayState::DrawScreen(void)
 
 	Font font = GameInst.GetFont();
 
-	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
-	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
+	DrawText("SCORE:", 50.f, 40.f, 25, WHITE);
+	DrawText(to_string(GameInst.GetScore()).c_str(), 190.f, 40.f, 25, WHITE);
 }
 
 void ScreenGameplayState::DrawLives() const

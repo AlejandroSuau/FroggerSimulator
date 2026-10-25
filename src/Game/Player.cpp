@@ -2,6 +2,7 @@
 
 void Player::Init()
 {
+    ResetPosition();
     textureUp_ = LoadTexture("resources/Game/Player_F.png");
     textureDown_ = LoadTexture("resources/Game/Player_D.png");
     textureLeft_ = LoadTexture("resources/Game/Player_L.png");
@@ -58,7 +59,9 @@ void Player::Move(int rowOffset, int columnOffset, const ScreenLayout& layout)
 
 void Player::Draw(const ScreenLayout& layout) const
 {
-    const Vector2 center = layout.GetCellCenter(row_, column_);
+    Vector2 center = layout.GetCellCenter(row_, column_);
+    center.x += horizontalOffset_;
+
     const Texture2D* texture = &textureUp_;
 
     switch (direction_)
@@ -89,11 +92,44 @@ void Player::Draw(const ScreenLayout& layout) const
     DrawTextureV(*texture, position, WHITE);
 }
 
+void Player::AddHorizontalOffset(float amount, const ScreenLayout& layout)
+{
+    horizontalOffset_ += amount;
+
+    // Mantener sincronizada la posición lógica con la visual
+    while (horizontalOffset_ >= ScreenLayout::CELL_SIZE &&
+        column_ < ScreenLayout::COLUMNS - 1)
+    {
+        ++column_;
+        horizontalOffset_ -= ScreenLayout::CELL_SIZE;
+    }
+
+    while (horizontalOffset_ <= -ScreenLayout::CELL_SIZE &&
+        column_ > 0)
+    {
+        --column_;
+        horizontalOffset_ += ScreenLayout::CELL_SIZE;
+    }
+
+    // Evitar que la rana salga del layout
+    Rectangle bounds = GetBounds(layout);
+
+    const float rightOverflow =
+        bounds.x + bounds.width - layout.GetRight();
+
+    if (rightOverflow > 0.0f)
+    {
+        horizontalOffset_ -= rightOverflow;
+    }
+}
+
 Rectangle Player::GetBounds(const ScreenLayout& layout) const
 {
     // All textures have same bounds
     const Texture2D* texture = &textureUp_;
-    const Vector2 center = layout.GetCellCenter(row_, column_);
+    
+    Vector2 center = layout.GetCellCenter(row_, column_);
+    center.x += horizontalOffset_;
 
     return {
         static_cast<float>(center.x - texture->width / 2),
@@ -108,6 +144,7 @@ void Player::ResetPosition()
     row_ = startingRow_;
     column_ = startingCol_;
     direction_ = Direction::Up;
+    horizontalOffset_ = 0.f;
 }
 
 std::pair<int, int> Player::GetColumnRow() const
