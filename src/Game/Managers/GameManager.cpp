@@ -35,6 +35,7 @@ void GameManager::InitGame()
 
     mainThemeMusic_ = LoadMusicStream("resources/Sounds/Lily_Islands.mp3");
     gameOverMusic_ = LoadMusicStream("resources/Sounds/Game_Over.mp3");
+    gameOverMusic_.looping = false;
 
     // Setup and init first screen
     ScreenState = &ScreenLogoState::getInstance();
