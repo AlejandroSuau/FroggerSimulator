@@ -41,20 +41,61 @@ void ScreenEndingState::UpdateScreen(float deltaTime)
 
 void ScreenEndingState::DrawScreen(void)
 {
-	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-	GameManager& GameInst = GameManager::GetGameManager();
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 
-	Font font = GameInst.GetFont();
+    GameManager& GameInst = GameManager::GetGameManager();
 
-	if (GameInst.GetEndResult() == EndResult::Win) {
-		DrawText("YOU WIN!", (GetScreenWidth() / 2.f) - (MeasureText("YOU WIN!", 25) / 2), (GetScreenHeight() / 2.f), 25, GREEN);
-	} else {
-		DrawText("GAME OVER", (GetScreenWidth() / 2.f) - (MeasureText("GAME OVER", 25) / 2), (GetScreenHeight() / 2.f), 25, RED);
-	}
+    const int centerX = GetScreenWidth() / 2;
+    const int centerY = GetScreenHeight() / 2;
 
-	DrawText("Press Enter for Playing", (GetScreenWidth() / 2.f) - (MeasureText("Press Enter for Playing", 25) / 2), (GetScreenHeight() / 2.f) + 50, 25, WHITE);
-	DrawText("Press 'O' for Options", (GetScreenWidth() / 2.f) - (MeasureText("Press '0' for Options", 25) / 2), (GetScreenHeight() / 2.f) + 100, 25, WHITE);
+    const int titleSize = 32;
+    const int textSize = 24;
 
+    const char* title = GameInst.GetEndResult() == EndResult::Win ? "YOU WIN!" : "GAME OVER";
+    const Color titleColor = GameInst.GetEndResult() == EndResult::Win ? GREEN : RED;
+
+    DrawText(
+        title,
+        centerX - MeasureText(title, titleSize) / 2,
+        centerY - 120,
+        titleSize,
+        titleColor);
+
+    const std::string gameScore = "GAME SCORE: " + std::to_string(GameInst.GetScore());
+
+    DrawText(
+        gameScore.c_str(),
+        centerX - MeasureText(gameScore.c_str(), textSize) / 2,
+        centerY - 50,
+        textSize,
+        WHITE);
+
+    const std::string highScore = "HIGH SCORE: " + std::to_string(GameInst.GetHighScore());
+
+    DrawText(
+        highScore.c_str(),
+        centerX - MeasureText(highScore.c_str(), textSize) / 2,
+        centerY,
+        textSize,
+        YELLOW);
+
+    const char* playText = "Press Enter for Playing";
+
+    DrawText(
+        playText,
+        centerX - MeasureText(playText, textSize) / 2,
+        centerY + 80,
+        textSize,
+        WHITE);
+
+    const char* optionsText = "Press 'O' for Options";
+
+    DrawText(
+        optionsText,
+        centerX - MeasureText(optionsText, textSize) / 2,
+        centerY + 120,
+        textSize,
+        WHITE);
 }
 
 void ScreenEndingState::UnloadScreen(void)

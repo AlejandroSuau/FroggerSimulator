@@ -9,6 +9,7 @@
 #include "Game/Enemies/RoadSection.h"
 #include "Game/Enemies/TurtleSection.h"
 #include "Game/WoodLogSection.h"
+#include "Game/Managers/GameManager.h"
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -57,4 +58,5 @@ private:
 	void DrawLifeTimer() const;
 	void DrawLives() const;
 	void OnFrogReachingHouse();
+	void OnEndGame(EndResult endResult);
 };

@@ -45,14 +45,13 @@ public:
 
 	Font& GetFont() { return font; }
 
-	int GetScore() { return score; }
-	void SetScore(int newValue) { score = newValue; }
+	int GetScore() const { return score_; }
+	void SetScore(int newValue) { score_ = newValue; }
+	int GetHighScore() const { return highScore_; }
+	void UpdateHighScore();
 
-	int GetSeconds() { return seconds; }
-	void SetSeconds(int newValue) { seconds = newValue; }
-
-	void IncreaseScore(int newValue) { score += newValue; }
-	void DecreaseScore(int newValue) { score -= newValue; }
+	void IncreaseScore(int newValue) { score_ += newValue; }
+	void DecreaseScore(int newValue) { score_ -= newValue; }
 
 	static GameManager& GetGameManager();
 
@@ -74,10 +73,8 @@ private:
 	int transFromScreen = -1;
 	int transToScreen = -1;
 
-	int score = 0;
-	int seconds = 0;
-
-	static GameManager *GameMngr;
+	int score_ = 0;
+	int highScore_ = 0;
 
 	int lives_ = 0;
 	float remainingLifeTimeInSeconds_ = 0.f;

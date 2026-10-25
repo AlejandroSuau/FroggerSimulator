@@ -49,6 +49,21 @@ bool Player::Update(const ScreenLayout& layout)
 
 void Player::Move(int rowOffset, int columnOffset, const ScreenLayout& layout)
 {
+    // Si veníamos desplazados por un tronco,
+    // primero elegimos la celda más cercana.
+    if (horizontalOffset_ >= ScreenLayout::CELL_SIZE / 2.0f &&
+        column_ < ScreenLayout::COLUMNS - 1)
+    {
+        ++column_;
+    }
+    else if (horizontalOffset_ <= -ScreenLayout::CELL_SIZE / 2.0f &&
+        column_ > 0)
+    {
+        --column_;
+    }
+
+    horizontalOffset_ = 0.0f;
+
     const int newRow = row_ + rowOffset;
     const int newColumn = column_ + columnOffset;
     if (!layout.IsValidCell(newRow, newColumn)) { return; }

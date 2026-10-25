@@ -2,12 +2,11 @@
 #pragma once
 
 #include "ScreenGameplay.h"
-#include "raylib.h"
-#include "Game/Managers/GameManager.h"
 #include "Game/GlobalGameDefines.h"
 
 #include <string>
 
+#include "raylib.h"
 
 ScreenGameplayState::ScreenGameplayState()
 	: screenLayout_(24, 88) {}
@@ -74,8 +73,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 		OnFrogReachingHouse();
 
 		if (screenLayout_.AreAllHomesFilled()) {
-			finishScreen_ = 4;
-			game.SetEndResult(EndResult::Win);
+			OnEndGame(EndResult::Win);
 		} else {
 			player_.ResetPosition();
 		}
@@ -86,6 +84,15 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 		game.GetRemainingLifeTime() <= 0.f) {
 		KillPlayer();
 	}
+}
+
+void ScreenGameplayState::OnEndGame(EndResult endResult)
+{
+	finishScreen_ = 4;
+	
+	GameManager& game = GameManager::GetGameManager();
+	game.SetEndResult(endResult);
+	game.UpdateHighScore();
 }
 
 void ScreenGameplayState::OnFrogReachingHouse()
@@ -105,8 +112,7 @@ void ScreenGameplayState::KillPlayer()
 	PlaySound(frogSquashSound_);
 
 	if (game.IsGameOver()) {
-		finishScreen_ = 4;
-		game.SetEndResult(EndResult::GameOver);
+		OnEndGame(EndResult::GameOver);
 	}
 }
 

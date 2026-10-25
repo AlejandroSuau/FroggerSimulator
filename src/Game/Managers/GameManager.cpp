@@ -14,8 +14,6 @@
 #include <string.h>             // String manipulation functions: strrchr(), strcmp()
 
 //---------------------------------------------------------------
-GameManager* GameManager::GameMngr = nullptr;
-
 
 GameManager& GameManager::GetGameManager()
 {
@@ -237,8 +235,7 @@ void GameManager::DrawTransition(void)
 
 void GameManager::ClearGameVar()
 {
-    score = 0;
-    seconds = 0;
+    score_ = 0;
 }
 
 void GameManager::LoseLife()
@@ -254,6 +251,7 @@ void GameManager::StartNewGame()
 {
     ResetLives();
     ResetRemainingLifeTime();
+    score_ = 0;
 }
 
 int GameManager::GetLives() const
@@ -284,6 +282,12 @@ bool GameManager::IsGameOver() const
 void GameManager::ResetLives()
 {
     lives_ = GameGlobalVar::kInitialLives;
+}
+
+void GameManager::UpdateHighScore() {
+    if (score_ > highScore_) {
+        highScore_ = score_;
+    }
 }
 
 void GameManager::ResetRemainingLifeTime()

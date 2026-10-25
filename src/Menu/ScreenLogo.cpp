@@ -1,5 +1,7 @@
 #include "ScreenLogo.h"
 
+#include <algorithm>
+
 namespace
 {
     constexpr float FADE_IN_TIME = 1.0f;
@@ -46,14 +48,27 @@ void ScreenLogoState::UpdateScreen(float deltaTime)
 }
 
 //-------------------------------------------------------------
+
 void ScreenLogoState::DrawScreen(void)
 {
-    Rectangle srcRect {
-        0.f, 0.f, static_cast<float>(logo_.width), static_cast<float>(logo_.height) };
-    Rectangle dstRect {
-        0.0f, 0.0f, static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) };
+    // Scaling logo for aspect ratio
+    const float screenWidth = static_cast<float>(GetScreenWidth());
+    const float screenHeight = static_cast<float>(GetScreenHeight());
 
-    DrawTexturePro(logo_, srcRect, dstRect, {0.f, 0.f}, 0.f, Fade(WHITE, alpha_));
+    const float scaleX = screenWidth / static_cast<float>(logo_.width);
+    const float scaleY = screenHeight / static_cast<float>(logo_.height);
+
+    const float scale = std::min(scaleX, scaleY);
+    const float width = logo_.width * scale;
+
+    const float height = logo_.height * scale;
+
+    const float x = (screenWidth - width) / 2.0f;
+    const float y = (screenHeight - height) / 2.0f;
+
+    Rectangle srcRect { 0.0f, 0.0f, static_cast<float>(logo_.width), static_cast<float>(logo_.height) };
+    Rectangle dstRect { x, y, width, height };
+    DrawTexturePro(logo_, srcRect, dstRect, { 0.0f, 0.0f }, 0.0f, Fade(WHITE, alpha_));
 }
 
 //-------------------------------------------------------------
