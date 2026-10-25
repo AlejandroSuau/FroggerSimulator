@@ -406,3 +406,29 @@ Makefile
 *.swo
 *.swn
 /build/compile_commands.json
+
+# Build
+build/
+bin/
+obj/
+
+# Visual Studio
+.vs/
+Debug/
+Release/
+x64/
+x86/
+
+# Archivos generados
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.exe
+*.tlog
+*.lastbuildstate
+*.log
+
+# Archivos de usuario
+*.user
+*.suo
